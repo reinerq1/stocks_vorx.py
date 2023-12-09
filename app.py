@@ -6,9 +6,11 @@ def cargar_productos():
         productos = []
     return productos
 
+
 def guardar_productos(productos):
     with open("productos.json", "w") as archivo:
         json.dump(productos, archivo, indent=4)
+
 
 def mostrar_menu():
     print("\n")
@@ -19,6 +21,7 @@ def mostrar_menu():
     print("2. Mostrar reportes")
     print("3. Salir")
     print("\n")
+
 
 def gestionar_productos(productos):
     while True:
@@ -43,6 +46,7 @@ def gestionar_productos(productos):
         else:
             print("Opción inválida. Por favor, intente nuevamente.")
 
+
 def ingresar_producto(productos):
     codigo = input("Ingrese el código del producto: ")
     if codigo in [producto["codigo"] for producto in productos]:
@@ -53,10 +57,12 @@ def ingresar_producto(productos):
     precio = float(input("Ingrese el precio del producto: "))
     stock = int(input("Ingrese la cantidad en stock: "))
 
-    producto = {"codigo": codigo, "nombre": nombre, "precio": precio, "stock": stock}
+    producto = {"codigo": codigo, "nombre": nombre,
+                "precio": precio, "stock": stock}
     productos.append(producto)
     guardar_productos(productos)
     print("Producto ingresado correctamente.")
+
 
 def modificar_producto(productos):
     codigo = input("Ingrese el código del producto a modificar: ")
@@ -71,20 +77,24 @@ def modificar_producto(productos):
         print("Producto no encontrado.")
         return
 
-    nombre = input("Ingrese el nuevo nombre del producto (dejar en blanco para no modificar): ")
+    nombre = input(
+        "Ingrese el nuevo nombre del producto (dejar en blanco para no modificar): ")
     if nombre:
         producto_encontrado["nombre"] = nombre
 
-    precio = input("Ingrese el nuevo precio del producto (dejar en blanco para no modificar): ")
+    precio = input(
+        "Ingrese el nuevo precio del producto (dejar en blanco para no modificar): ")
     if precio:
         producto_encontrado["precio"] = float(precio)
 
-    stock = input("Ingrese la nueva cantidad en stock (dejar en blanco para no modificar): ")
+    stock = input(
+        "Ingrese la nueva cantidad en stock (dejar en blanco para no modificar): ")
     if stock:
         producto_encontrado["stock"] = int(stock)
 
     guardar_productos(productos)
     print("Producto modificado correctamente.")
+
 
 def eliminar_producto(productos):
     codigo = input("Ingrese el código del producto a eliminar: ")
@@ -103,6 +113,7 @@ def eliminar_producto(productos):
     guardar_productos(productos)
     print("Producto eliminado correctamente.")
 
+
 def mostrar_reportes(productos):
     print("\n--- Reportes ---")
     print("1. Mostrar todos los productos")
@@ -120,6 +131,7 @@ def mostrar_reportes(productos):
     else:
         print("Opción inválida. Por favor, intente nuevamente.")
 
+
 def mostrar_todos_los_productos(productos):
     print("\n--- Todos los productos ---")
     for producto in productos:
@@ -128,6 +140,7 @@ def mostrar_todos_los_productos(productos):
         print(f"Precio: {producto['precio']}")
         print(f"Stock: {producto['stock']}")
         print("--------------------")
+
 
 def mostrar_productos_bajo_stock(productos):
     print("\n--- Productos con bajo stock ---")
@@ -138,6 +151,7 @@ def mostrar_productos_bajo_stock(productos):
             print(f"Precio: {producto['precio']}")
             print(f"Stock: {producto['stock']}")
             print("--------------------")
+
 
 def main():
     productos = cargar_productos()
@@ -155,6 +169,7 @@ def main():
             break
         else:
             print("Opción inválida. Por favor, intente nuevamente.")
+
 
 if __name__ == "__main__":
     main()
